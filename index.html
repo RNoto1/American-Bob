@@ -191,10 +191,9 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font
   <h1>ALL-AMERICAN BOB</h1>
   <h2>★ SASQUATCH PATRIOT ★</h2>
   <p>A lone Sasquatch walks through the forest...</p>
-  <p>Commies and creeps lurk among the trees.</p>
-  <p>Throw hands or blast away — America depends on it!</p>
-  <p>🎁 3 lives. Don't let the creeps get you!</p>
-  <button class="btn-start" id="btn-start">START</button>
+  <p>Commies and pedos lurk among the trees.</p>
+<p>Throw hands or blast away — America depends on it!</p>
+<p>🎁 3 lives. Don't let the pedos get you!</p>  <button class="btn-start" id="btn-start">START</button>
 </div>
 
 <!-- Game over screen -->
@@ -223,14 +222,22 @@ ctx.imageSmoothingEnabled = false;
 
 function resizeCanvas() {
   const w = window.innerWidth;
-  const h = window.innerHeight;
+  // Use visualViewport if available — it accounts for mobile browser chrome (address bar, nav bar)
+  const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   const scale = Math.min(w / VW, h / VH);
   canvas.style.width = (VW * scale) + 'px';
   canvas.style.height = (VH * scale) + 'px';
 }
 window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', () => {
+  // Delay resize because mobile browser UI is still animating after rotation
+  setTimeout(resizeCanvas, 100);
+  setTimeout(resizeCanvas, 300);
+});
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', resizeCanvas);
+}
 resizeCanvas();
-
 // --- Audio Engine ---
 class AudioEngine {
   constructor() {
